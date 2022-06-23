@@ -6,7 +6,7 @@ const mongoose  = require("mongoose");
 const app = express();
 const postModels=require('./models/posts')
 const postRouter=require("./routes/posts")
-const port = 8080
+const port = process.env.PORT || 3000;
 
 mongoose.connect('mongodb://localhost:27017/testdb').then(()=>{
     console.log('connected to database')
@@ -46,7 +46,7 @@ app.all('*', function (req, res, next) {
     next();
 });
 
-app.get('/api/get', protectedRoute, function (req, res) {
+app.get('/api/get', function (req, res) {
     res.send(
         {
             content:"Greetings"
